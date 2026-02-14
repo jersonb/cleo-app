@@ -20,8 +20,9 @@ jobs:
     #   run: docker build . --file Dockerfile --tag cleo-app:$(date +%s)
     - name: Set current date as env variable
       id: date_step
-      run: echo "TIME_STAMP=$(date +%s)" >> $GITHUB_OUTPUT
-      
+      run: | 
+        echo "TIME_STAMP=$(date +%s)" >> $GITHUB_OUTPUT
+        ls -R
     - name: Auth dockerHub
       uses: docker/login-action@v3.7.0
       with:
