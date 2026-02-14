@@ -33,7 +33,7 @@ jobs:
       uses: docker/build-push-action@v6.19.2
       with:
         push: true
-        file: ./Dockerfile
+        # file: ./Dockerfile
         context: .
         tags: |
             ${{ secrets.DOCKER_USERNAME }}/cleo-app:latest 
