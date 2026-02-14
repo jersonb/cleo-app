@@ -37,6 +37,6 @@ jobs:
         context: .
         tags: |
             ${{ secrets.DOCKER_USERNAME }}/cleo-app:latest 
-        # ${{ secrets.DOCKER_USERNAME }}/cleo-app:${{ steps.date_step.outputs.TIME_STAMP }}
+            ${{ secrets.DOCKER_USERNAME }}/cleo-app:${{ steps.date_step.outputs.TIME_STAMP }}
 
             
