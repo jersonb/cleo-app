@@ -1,0 +1,61 @@
+:host {
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  padding: 0.5em;
+  border: 0.1em dotted rgba(3, 175, 243, 0.2);
+  box-sizing: border-box;
+
+  form {
+    padding: 1em;
+    gap: 2em;
+    min-width: 24vw;
+    overflow-y: scroll;
+    scrollbar-color: rgba(84, 94, 120, 0.2) var(--pico-background-color);
+    scrollbar-width: thin;
+
+    textarea {
+      overflow: hidden;
+      resize: none;
+    }
+
+    .danger {
+      --pico-background-color: #d81b60;
+      --pico-border-color: #d81b6077;
+
+      font-weight: bold;
+      color: white;
+    }
+  }
+
+  .preview {
+    flex: 2;
+    gap: 2em;
+    border: 0.1rem solid rgba(3, 175, 243, 0.068);
+    display: flex;
+    padding: 0.5em;
+
+    .paper {
+      display: flex;
+      justify-content: center;
+      border: 0.1rem dashed rgba(8, 8, 8, 0.521);
+      box-shadow: 0 0.2rem 0.5rem rgba(3, 175, 243, 0.2);
+      width: 210mm;
+      margin: auto;
+      aspect-ratio: 297 / 210;
+      box-sizing: border-box;
+      background-color: white;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      span {
+        position: relative;
+        height: 1px;
+        font-family: 'Times New Roman', Times, serif;
+      }
+    }
+  }
+}
