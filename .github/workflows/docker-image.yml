@@ -21,4 +21,16 @@ jobs:
       with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          
+    
+  # You may pin to the exact commit or the version.
+  # uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8
+      name: Build and push Docker images
+    - uses: docker/build-push-action@v6.19.2
+      with:
+        push: true
+        context: .
+        tags: |
+            jersonb/app-cleo:latest 
+            jersonb/app-cleo:$(date +%s)
+
+            
