@@ -30,7 +30,7 @@ jobs:
         push: true
         context: .
         tags: |
-            jersonb/app-cleo:latest 
-            jersonb/app-cleo:$(date +%s)
+            $(secrets.DOCKER_USERNAME)/cleo-app:latest 
+            $(secrets.DOCKER_USERNAME)/cleo-app:$(date +%s)
 
             
