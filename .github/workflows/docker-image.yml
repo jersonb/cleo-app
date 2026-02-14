@@ -33,7 +33,7 @@ jobs:
         push: true
         context: .
         tags: |
-            $(secrets.DOCKER_USERNAME)/cleo-app:latest 
-            $(secrets.DOCKER_USERNAME)/cleo-app:$(env.TIME_STAMP)
+            ${{ secrets.DOCKER_USERNAME }}/cleo-app:latest 
+            ${{ secrets.DOCKER_USERNAME }}/cleo-app:${{ env.TIME_STAMP }}
 
             
