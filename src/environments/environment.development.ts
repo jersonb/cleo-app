@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:7066',
+  apiUrl: 'https://api.cleo.ooo',
 };
