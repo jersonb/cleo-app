@@ -3,7 +3,6 @@
 # =========================================
 ARG NODE_VERSION=24.12.0-alpine
 ARG NGINX_VERSION=alpine3.22
-ARG NODE_ENV=production
 # Use a lightweight Node.js image for building (customizable via ARG)
 FROM node:${NODE_VERSION} AS builder
 
