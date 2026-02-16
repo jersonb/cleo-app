@@ -111,8 +111,22 @@ export class App implements OnInit {
 
   sendFormData() {
     this.service.createRequest(this.getFormData()).subscribe({
-      next(value) {
-        console.log('Request created successfully', value);
+      next: (response) => {
+        const locationUrl = response.headers.get('Location');
+        if (locationUrl) {
+
+          this.service.downloadFile(locationUrl).subscribe((response) => {
+
+            const blob = response.body as Blob;
+            const filename = 'certificado.zip';
+            const a = document.createElement('a');
+            const objectUrl = URL.createObjectURL(blob);
+            a.href = objectUrl;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(objectUrl);
+          });
+        }
       },
       error: (err) => console.error('Error creating request', err),
     });
@@ -120,6 +134,7 @@ export class App implements OnInit {
 
   private getFormData(): FormData {
     const formData = new FormData();
+
     const file = this.backGroundFile();
     const blob: Blob = file as Blob;
 
