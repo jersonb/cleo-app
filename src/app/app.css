@@ -42,7 +42,7 @@
     grid-area: footer;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 1200px) {
     grid-template-columns: auto;
     grid-template-rows: 50px 30vh auto;
     grid-template-areas:
