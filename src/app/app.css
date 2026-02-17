@@ -44,18 +44,17 @@
 
   @media (max-width: 800px) {
     grid-template-columns: auto;
-    grid-template-rows: 20px 30vh 60vh;
+    grid-template-rows: 50px 30vh auto;
     grid-template-areas:
       "nav"
       "main"
       "aside"
-      "aside"
-    ;
+      "aside";
 
     nav {
       place-content: center;
       place-items: center;
-      height: 20px;
+      height: 10px;
 
       h1 {
         font-size: 10px;
@@ -63,9 +62,7 @@
     }
 
     aside {
-
-      height: 70vh;
-
+      height: 65vh;
     }
 
     main {
