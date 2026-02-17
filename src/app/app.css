@@ -9,7 +9,7 @@
   min-width: 100vw;
   display: grid;
   grid-template-columns: 300px 1fr;
-  grid-template-rows: auto 1fr 30px;
+  grid-template-rows: 58px calc(100dvh - 88px) 30px;
   grid-template-areas:
     "nav nav"
     "aside main"
@@ -17,7 +17,7 @@
 
   nav {
     grid-area: nav;
-    height: 50px;
+    height: 58px;
     align-items: center;
     padding: 1rem;
     background-color: var(--pico-muted-border-color);
@@ -26,8 +26,8 @@
 
   aside {
     grid-area: aside;
-    height: calc(100vh - 50px);
-    top: 50px;
+    height: calc(100vh - 58px);
+    top: 58px;
     position: sticky;
     overflow-y: auto;
     scrollbar-width: thin;
@@ -36,10 +36,6 @@
 
   main {
     grid-area: main;
-    place-items: center;
-    place-content: center;
-    max-width: 100%;
-    max-height: 100%;
   }
 
   footer {
