@@ -1,0 +1,22 @@
+:host {
+  display: contents;
+  border: 0.1rem solid rgba(3, 175, 243, 0.068);
+  padding: .5rem;
+
+  .paper {
+    text-align: center;
+    border: 0.1rem dashed rgba(8, 8, 8, 0.521);
+    box-shadow: 0 0.2rem 0.5rem rgba(3, 175, 243, 0.2);
+    aspect-ratio: 297 / 210;
+    resize: both;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 80%;
+
+    span {
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+  }
+}

@@ -1,61 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 :host {
-  top: 0;
-  left: 0;
   position: fixed;
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-  padding: 0.5em;
-  border: 0.1em dotted rgba(3, 175, 243, 0.2);
-  box-sizing: border-box;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: auto 1fr 30px;
+  grid-template-areas:
+    "nav nav"
+    "aside main"
+    "aside footer";
 
-  form {
-    padding: 1em;
-    gap: 2em;
-    min-width: 24vw;
-    overflow-y: scroll;
-    scrollbar-color: rgba(84, 94, 120, 0.2) var(--pico-background-color);
-    scrollbar-width: thin;
-
-    textarea {
-      overflow: hidden;
-      resize: none;
-    }
-
-    .danger {
-      --pico-background-color: #d81b60;
-      --pico-border-color: #d81b6077;
-
-      font-weight: bold;
-      color: white;
-    }
+  nav {
+    grid-area: nav;
+    height: 50px;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--pico-muted-border-color);
   }
 
-  .preview {
-    flex: 2;
-    gap: 2em;
-    border: 0.1rem solid rgba(3, 175, 243, 0.068);
-    display: flex;
-    padding: 0.5em;
 
-    .paper {
-      display: flex;
-      justify-content: center;
-      border: 0.1rem dashed rgba(8, 8, 8, 0.521);
-      box-shadow: 0 0.2rem 0.5rem rgba(3, 175, 243, 0.2);
-      width: 210mm;
-      margin: auto;
-      aspect-ratio: 297 / 210;
-      box-sizing: border-box;
-      background-color: white;
-      background-repeat: no-repeat;
-      background-size: cover;
+  aside {
+    grid-area: aside;
+    height: calc(100vh - 50px);
+    top: 50px;
+    position: sticky;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(84, 94, 120, 0.2) var(--pico-background-color);
+  }
 
-      span {
-        position: relative;
-        height: 1px;
-        font-family: 'Times New Roman', Times, serif;
+  main {
+    grid-area: main;
+    place-items: center;
+    place-content: center;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  footer {
+    grid-area: footer;
+  }
+
+  @media (max-width: 800px) {
+    grid-template-columns: auto;
+    grid-template-rows: 20px 30vh 60vh;
+    grid-template-areas:
+      "nav"
+      "main"
+      "aside"
+      "aside"
+    ;
+
+    nav {
+      place-content: center;
+      place-items: center;
+      height: 20px;
+
+      h1 {
+        font-size: 10px;
       }
+    }
+
+    aside {
+
+      height: 70vh;
+
+    }
+
+    main {
+      grid-area: main;
+      top: 20px;
+      position: sticky;
+    }
+
+    footer {
+      display: none;
     }
   }
 }
