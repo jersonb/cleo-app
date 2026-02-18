@@ -19,6 +19,7 @@
   background-size: cover;
 
   span {
+    position: relative;
     font-family: 'Times New Roman', Times, serif;
   }
 

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit,  signal } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AppService } from '../app.service';
 
@@ -29,10 +29,8 @@ export class Configuration implements OnInit {
       name: new FormControl(''),
       names: new FormArray([]),
     });
-  }
 
-  get nameTest(): string {
-    return this.configureForm.get('nameTest')?.value ?? 'Nome Para Teste';
+    this.service.configurationPreview = this.configureForm;
   }
 
   get positionY(): number {
@@ -77,11 +75,7 @@ export class Configuration implements OnInit {
     }
   }
 
-  protected getBackGround(): object {
-    return {
-      backgroundImage: `url(${this.backGroundUrl()})`,
-    };
-  }
+
 
   protected addNames() {
     const namesRaw = this.configureForm.get('name');
@@ -98,7 +92,6 @@ export class Configuration implements OnInit {
   protected removeName(id: number) {
     this.names.removeAt(id);
   }
-
 
   sendFormData() {
     this.service.createRequest(this.getFormData()).subscribe({
@@ -145,3 +138,4 @@ export class Configuration implements OnInit {
     return formData;
   }
 }
+
