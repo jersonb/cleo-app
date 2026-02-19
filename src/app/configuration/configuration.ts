@@ -1,6 +1,7 @@
-import { Component, inject, OnInit,  signal } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AppService } from '../app.service';
+import { ConfigurationService } from '../configuration.service';
 
 @Component({
   selector: 'app-configuration',
@@ -8,58 +9,11 @@ import { AppService } from '../app.service';
   templateUrl: './configuration.html',
   styleUrl: './configuration.css',
 })
-export class Configuration implements OnInit {
+export class Configuration {
   service = inject(AppService);
 
-  private readonly backGroundFile = signal(new File([], ''));
-  private readonly backGroundUrl = signal('template.png');
-
-  configureForm!: FormGroup;
-
-  ngOnInit(): void {
-    this.configureForm = new FormGroup({
-      nameTest: new FormControl(''),
-      backGround: new FormControl(''),
-      positionY: new FormControl(50),
-      fontSize: new FormControl(30),
-      fontColor: new FormControl('#000000'),
-      textTransform: new FormControl('capitalize'),
-      italic: new FormControl(false),
-      bold: new FormControl(false),
-      name: new FormControl(''),
-      names: new FormArray([]),
-    });
-
-    this.service.configurationPreview = this.configureForm;
-  }
-
-  get positionY(): number {
-    return this.configureForm.get('positionY')?.value!;
-  }
-
-  get fontSize(): number {
-    return this.configureForm.get('fontSize')?.value!;
-  }
-
-  get fontColor(): string {
-    return this.configureForm.get('fontColor')?.value!;
-  }
-
-  get textTransform(): string {
-    return this.configureForm.get('textTransform')?.value!;
-  }
-
-  get italic(): string {
-    return this.configureForm.get('italic')?.value! ? 'italic' : '';
-  }
-
-  get bold(): string {
-    return this.configureForm.get('bold')?.value! ? 'bold' : '';
-  }
-
-  get names(): FormArray {
-    return this.configureForm.get('names') as FormArray;
-  }
+  configureFormService = inject(ConfigurationService);
+  configureForm = this.configureFormService.configureForm;
 
   protected onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -70,8 +24,8 @@ export class Configuration implements OnInit {
       });
       this.configureForm.get('backGround')?.updateValueAndValidity();
 
-      this.backGroundUrl.update(() => URL.createObjectURL(file));
-      this.backGroundFile.update(() => file);
+      this.configureFormService.backGroundUrl.update(() => URL.createObjectURL(file));
+      this.configureFormService.backGroundFile.update(() => file);
     }
   }
 
@@ -83,14 +37,14 @@ export class Configuration implements OnInit {
       const namesAsString = namesRaw.value as string;
       if (namesAsString.length > 0) {
         const names = namesAsString.split('\n');
-        names.forEach((name) => this.names.push(new FormControl(name)));
+        names.forEach((name) => this.configureFormService.names.push(new FormControl(name)));
         namesRaw.reset();
       }
     }
   }
 
   protected removeName(id: number) {
-    this.names.removeAt(id);
+    this.configureFormService.names.removeAt(id);
   }
 
   sendFormData() {
@@ -119,19 +73,19 @@ export class Configuration implements OnInit {
   private getFormData(): FormData {
     const formData = new FormData();
 
-    const file = this.backGroundFile();
+    const file = this.configureFormService.backGroundFile();
     const blob: Blob = file as Blob;
 
     formData.append('backGroundFile', blob, file.name);
 
-    this.names.controls.forEach((name) => {
+    this.configureFormService.names.controls.forEach((name) => {
       formData.append('names', name.value);
     });
 
-    formData.append('positionY', this.positionY.toString());
-    formData.append('fontSize', this.fontSize.toString());
-    formData.append('fontColor', this.fontColor);
-    formData.append('textTransform', this.textTransform);
+    formData.append('positionY', (this.configureFormService.positionY).toString());
+    formData.append('fontSize', (this.configureFormService.fontSize * 1.6).toString());
+    formData.append('fontColor', this.configureFormService.fontColor);
+    formData.append('textTransform', this.configureFormService.textTransform);
     formData.append('italic', this.configureForm.get('italic')?.value);
     formData.append('bold', this.configureForm.get('bold')?.value);
 

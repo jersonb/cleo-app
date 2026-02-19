@@ -1,5 +1,5 @@
-import { Component, inject, signal } from '@angular/core';
-import { AppService } from '../app.service';
+import { Component, inject } from '@angular/core';
+import { ConfigurationService } from '../configuration.service';
 
 @Component({
   selector: 'app-preview',
@@ -9,50 +9,22 @@ import { AppService } from '../app.service';
 })
 export class Preview {
 
-  service = inject(AppService);
-  private readonly backGroundUrl = signal('template.png');
+  configureFormService = inject(ConfigurationService);
 
-  get nameTest(): string {
-    return this.service.configurationPreview?.get('nameTest')?.value ?? 'Nome Para Teste';
-  }
-
-  get positionY(): number {
-    return this.service.configurationPreview?.get('positionY')?.value!;
-  }
-
-  get fontSize(): number {
-    return this.service.configurationPreview?.get('fontSize')?.value!;
-  }
-
-  get fontColor(): string {
-    return this.service.configurationPreview?.get('fontColor')?.value!;
-  }
-
-  get textTransform(): string {
-    return this.service.configurationPreview?.get('textTransform')?.value!;
-  }
-
-  get italic(): string {
-    return this.service.configurationPreview?.get('italic')?.value! ? 'italic' : '';
-  }
-
-  get bold(): string {
-    return this.service.configurationPreview?.get('bold')?.value! ? 'bold' : '';
-  }
   getStyleText() {
     return {
-      'font-size': `${this.fontSize}px`,
-      color: this.fontColor,
-      top: `${this.positionY - 3}%`,
-      'text-transform': this.textTransform,
-      'font-weight': this.bold,
-      'font-style': this.italic,
+      'font-size': `${this.configureFormService.fontSize * 0.25}cqh`,
+      color: this.configureFormService.fontColor,
+      top: `${this.configureFormService.positionY - 1}%`,
+      'text-transform': this.configureFormService.textTransform,
+      'font-weight': this.configureFormService.bold,
+      'font-style': this.configureFormService.italic,
     };
   }
 
   getBackGround() {
     return {
-      'background-image': `url(${this.backGroundUrl()})`,
+      'background-image': `url(${this.configureFormService.backGroundUrl()})`,
     }
   }
 

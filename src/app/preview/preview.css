@@ -17,10 +17,11 @@
   box-shadow: 0 0.2rem 0.5rem rgba(3, 175, 243, 0.2);
   background-repeat: no-repeat;
   background-size: cover;
+  container-type: inline-size;
 
   span {
     position: relative;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: Arial;
   }
 
 }

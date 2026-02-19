@@ -4,7 +4,7 @@
 
     <div class="column">
       <label for="nameTest">Nome de Teste:</label>
-      <input formControlName="nameTest" type="text" name="" id="nameTest" placeholder="Nome Para Teste">
+      <input formControlName="nameTest" type="text" name="nameTest" id="nameTest" placeholder="Nome Para Teste">
     </div>
 
     <div class="column">
@@ -16,13 +16,13 @@
     <div class="column">
       <label for="position">Posição <small>(1-99)%</small>:</label>
       <input formControlName="positionY" type="range" name="position" id="position" min="1" max="99" step="1">
-      <code>{{positionY.toFixed(2)}}</code>
+      <code>{{configureFormService.positionY}}</code>
     </div>
 
     <div class="column">
       <label for="fontSize">Tamanho <small>(12-50)</small>:</label>
       <input formControlName="fontSize" type="range" name="fontSize" id="fontSize" min="12" max="50" step="1">
-      <code>{{fontSize}}</code>
+      <code>{{configureFormService.fontSize}}</code>
     </div>
 
     <div class="column">
@@ -65,7 +65,7 @@
       <button type="button" (click)="addNames()">+</button>
     </fieldset>
     <ol formArrayName="names">
-      @for (item of names.controls; track $index;let i = $index) {
+      @for (item of configureFormService.names.controls; track $index;let i = $index) {
       <li>
         <fieldset class="column" role="group">
           <button class="danger contrast" type="button" (click)="removeName($index)">-</button>
