@@ -1,0 +1,24 @@
+:host {
+  form {
+    padding: .5rem;
+    margin: .5rem;
+  }
+
+  textarea {
+    overflow: hidden;
+    resize: none;
+  }
+
+  .danger {
+    --pico-background-color: #d81b60;
+    --pico-border-color: #d81b6077;
+
+    font-weight: bold;
+    color: white;
+
+  }
+  ol {
+    margin: 0;
+    padding-left: 0;
+  }
+}

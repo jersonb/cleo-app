@@ -1,0 +1,81 @@
+<form [formGroup]="configureForm" (submit)="sendFormData()">
+  <details open>
+    <summary>Gerar Teste</summary>
+
+    <div class="column">
+      <label for="nameTest">Nome de Teste:</label>
+      <input formControlName="nameTest" type="text" name="nameTest" id="nameTest" placeholder="Nome Para Teste">
+    </div>
+
+    <div class="column">
+      <label for="backGround">Imagem:</label>
+      <input formControlName="backGround" type="file" name="backGround" id="backGround" accept="image/*"
+        (change)="onFileChange($event)">
+    </div>
+
+    <div class="column">
+      <label for="position">Posição <small>(1-99)%</small>:</label>
+      <input formControlName="positionY" type="range" name="position" id="position" min="1" max="99" step="1">
+      <code>{{configureFormService.positionY}}</code>
+    </div>
+
+    <div class="column">
+      <label for="fontSize">Tamanho <small>(12-50)</small>:</label>
+      <input formControlName="fontSize" type="range" name="fontSize" id="fontSize" min="12" max="50" step="1">
+      <code>{{configureFormService.fontSize}}</code>
+    </div>
+
+    <div class="column">
+      <label for="fontColor">Color:</label>
+      <input formControlName="fontColor" type="color" name="fontColor" id="fontColor" aria-label="Color picker">
+    </div>
+
+    <div class="row">
+      <input formControlName="italic" type="checkbox" role="switch" aria-checked="true" name="italic" id="italic">
+      <label for="italic">Itálico:</label>
+    </div>
+
+    <div class="row">
+      <input formControlName="bold" type="checkbox" role="switch" aria-checked="true" name="bold" id="bold">
+      <label for="bold">Negrito:</label>
+    </div>
+
+    <div class="row">
+      <input formControlName="textTransform" type="radio" role="radiogroup" name="textTransform" id="textTransform-1"
+        value="capitalize">
+      <label for="textTransform-1">Capitalizado:</label>
+    </div>
+
+    <div class="row">
+      <input formControlName="textTransform" type="radio" role="radiogroup" name="textTransform" id="textTransform-2"
+        value="uppercase">
+      <label for="textTransform-2">Caixa alta:</label>
+    </div>
+
+    <div class="row">
+      <input formControlName="textTransform" type="radio" role="radiogroup" name="textTransform" id="textTransform-3"
+        value="lowercase">
+      <label for="textTransform-3">Caixa baixa:</label>
+    </div>
+  </details>
+  <details open>
+    <summary>Gerar</summary>
+    <fieldset for="name" class="column" role="group">
+      <textarea name="name" rows="1" formControlName="name"></textarea>
+      <button type="button" (click)="addNames()">+</button>
+    </fieldset>
+    <ol formArrayName="names">
+      @for (item of configureFormService.names.controls; track $index;let i = $index) {
+      <li>
+        <fieldset class="column" role="group">
+          <button class="danger contrast" type="button" (click)="removeName($index)">-</button>
+          <input id="names-{{i}}" type="text" readonly [formControlName]="i" />
+        </fieldset>
+      </li>
+      }
+    </ol>
+  </details>
+  <div>
+    <button class="contrast" type="submit">Gerar</button>
+  </div>
+</form>

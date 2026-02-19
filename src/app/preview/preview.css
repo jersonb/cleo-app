@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.paper {
+
+  aspect-ratio: 297 / 210;
+  background-size: 100%;
+  resize: both;
+  height: 95%;
+
+  text-align: center;
+  border: 0.1rem dashed rgba(8, 8, 8, 0.521);
+  box-shadow: 0 0.2rem 0.5rem rgba(3, 175, 243, 0.2);
+  background-repeat: no-repeat;
+  background-size: cover;
+  container-type: inline-size;
+
+  span {
+    position: relative;
+    font-family: Arial;
+  }
+
+}

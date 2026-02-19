@@ -8,7 +8,6 @@ import { environment } from '../environments/environment.development';
 })
 export class AppService {
   http = inject(HttpClient);
-
   createRequest(requestCreate: FormData): Observable<HttpResponse<Object>> {
     return this.http.post<HttpResponse<Object>>(`${environment.apiUrl}/certificates`, requestCreate,
       {
@@ -24,3 +23,4 @@ export class AppService {
       });
   }
 }
+
